@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="canvas">
+      <svg
+        class="text_svg"
+        width="53"
+        height="26"
+        viewBox="0 0 53 26"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class="text_E"
+          d="M41.6309 0.359863H52.4309V3.95986H45.5909V10.6199H51.0269V14.2199H45.5909V21.9599H52.4309V25.5599H41.6309V0.359863Z"
+          fill="black"
+        />
+        <path
+          class="text_T"
+          d="M31.6136 3.95986H27.4736V0.359863H39.7136V3.95986H35.5736V25.5599H31.6136V3.95986Z"
+          fill="black"
+        />
+        <path
+          class="text_U"
+          d="M19.7933 25.9199C17.8733 25.9199 16.4093 25.3799 15.4013 24.2999C14.3933 23.1959 13.8893 21.6239 13.8893 19.5839V0.359863H17.8493V19.8719C17.8493 20.7359 18.0173 21.3599 18.3533 21.7439C18.7133 22.1279 19.2173 22.3199 19.8653 22.3199C20.5133 22.3199 21.0053 22.1279 21.3413 21.7439C21.7013 21.3599 21.8813 20.7359 21.8813 19.8719V0.359863H25.6973V19.5839C25.6973 21.6239 25.1933 23.1959 24.1853 24.2999C23.1773 25.3799 21.7133 25.9199 19.7933 25.9199Z"
+          fill="black"
+        />
+        <path
+          class="text_C"
+          d="M5.832 25.92C3.936 25.92 2.484 25.38 1.476 24.3C0.492 23.22 0 21.696 0 19.728V6.192C0 4.224 0.492 2.7 1.476 1.62C2.484 0.54 3.936 0 5.832 0C7.728 0 9.168 0.54 10.152 1.62C11.16 2.7 11.664 4.224 11.664 6.192V8.856H7.92V5.94C7.92 4.38 7.26 3.6 5.94 3.6C4.62 3.6 3.96 4.38 3.96 5.94V20.016C3.96 21.552 4.62 22.32 5.94 22.32C7.26 22.32 7.92 21.552 7.92 20.016V16.164H11.664V19.728C11.664 21.696 11.16 23.22 10.152 24.3C9.168 25.38 7.728 25.92 5.832 25.92Z"
+          fill="black"
+        />
+      </svg>
+    </div>
+  </body>
+</html>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .canvas {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: bisque;
+    position: relative;
+  }
+
+  .text_svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+  .text_C {
+    fill: red;
+  }
+
+  .text_U {
+  }
+
+  .text_T {
+  }
+
+  .text_E {
+    animation: longer 2s infinite alternate linear;
+  }
+
+  @keyframes longer {
+    from {
+      transform: scaleY(1);
+    }
+    to {
+      transform: scaleY(1.4);
+    }
+  }
+</style>
