@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reusable Box Style</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #e8e8e8;
+        height: 100vh;
+        position: relative;
+        margin: 0;
+        font-family: system-ui, sans-serif;
+      }
+
+      /* ---------- 처음에 뜨는 title.png 전체 화면 오버레이 ---------- */
+      #titleScreen {
+        position: fixed;
+        inset: 0;
+        background: #e8e8e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999; /* 카드 위에 올라오게 */
+      }
+
+      #titleScreen img {
+        max-width: 90vw;
+        max-height: 90vh;
+        cursor: pointer;
+        display: block;
+      }
+
+      /* 박스 스타일 (border, shadow) */
+      .shadow-box {
+        padding: 10px;
+        background: #ffffff;
+        border: 2px solid #00000010;
+        border-radius: 12px;
+        box-shadow: 1.27px 2.55px 15.46px 1.27px rgba(0, 0, 0, 0.5);
+      }
+
+      .shadow-box p {
+        margin: 8px 0;
+        color: #333;
+        font-size: 14px;
+      }
+
+      /* ---------- 플립 영역 공통 ---------- */
+      .card-wrapper {
+        position: absolute;
+        perspective: 1200px;
+        cursor: pointer;
+        display: inline-block;
+        animation: floatCard 4s ease-in-out infinite;
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease;
+      }
+
+      .card-face {
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        backface-visibility: hidden;
+
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+      }
+
+      .card-wrapper.is-flipped .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-wrapper:hover .card-inner {
+        transform: scale(1.15);
+      }
+
+      .card-wrapper.is-flipped:hover .card-inner {
+        transform: scale(1.15) rotateY(180deg);
+      }
+
+      /* ---------- 텍스트 카드 전용 ---------- */
+      .fixed-card {
+        width: 300px;
+        height: 200px;
+      }
+
+      .card-front {
+        background: #ffffff;
+        justify-content: center;
+        padding: 30px;
+      }
+
+      .card-back {
+        background: #ffffff;
+        border: 2px solid #00000010;
+        transform: rotateY(180deg);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .fixed-card .card-back {
+        font-size: 40px;
+        font-weight: 700;
+      }
+
+      /* ---------- 사진 카드 공통 ---------- */
+      .photo-card .card-front {
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
+      }
+
+      .photo-card .card-back {
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .photo-card img {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+
+      /* 사진 카드 크기 개별 설정 */
+      .photo-depth {
+        width: 120px;
+        height: 120px;
+      }
+
+      .photo-sopt {
+        width: 150px;
+        height: 120px;
+      }
+
+      .photo-baby {
+        width: 200px;
+        height: 150px;
+      }
+
+      .photo-profile {
+        width: 260px;
+        height: 335px;
+      }
+      .photo-movie {
+        width: 500px;
+        height: 335px;
+      }
+      .photo-ation {
+        width: 400px;
+        height: 240px;
+      }
+      .photo-song {
+        width: 400px;
+        height: 230px;
+      }
+
+      /* 공통 흔들림 애니메이션 */
+      @keyframes floatCard {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(8px, -6px) rotate(1deg);
+        }
+        50% {
+          transform: translate(-10px, 8px) rotate(-1deg);
+        }
+        75% {
+          transform: translate(6px, 4px) rotate(1deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
+
+      /* 카드마다 애니메이션 딜레이 */
+      #birthCard {
+        animation-delay: 0s;
+      }
+      #soptCard {
+        animation-delay: 0.7s;
+      }
+      #babyCard {
+        animation-delay: 1.4s;
+      }
+      #profileCard {
+        animation-delay: 0.4s;
+      }
+      #movieCard {
+        animation-delay: 1.1s;
+      }
+      #ationCard {
+        animation-delay: 0.9s;
+      }
+      #depthCard {
+        animation-delay: 1.8s;
+      }
+      #songCard {
+        animation-delay: 0.8s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ⭐ 처음에 뜨는 타이틀 화면 -->
+    <div id="titleScreen">
+      <img src="asset/title.png" alt="title" />
+    </div>
+
+    <!-- 생일 카드 -->
+    <div class="card-wrapper fixed-card" id="birthCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <p>Birth : Sep 20, 2003</p>
+          <p>Rosemary</p>
+          <p>Sapphire</p>
+          <p>Lime Tree</p>
+          <p>⋯AND</p>
+        </div>
+        <div class="card-face card-back">
+          <p>International</p>
+          <p>Pepperoni Day !</p>
+          <b>🍕</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- sopt 카드 -->
+    <div class="card-wrapper photo-card photo-sopt" id="soptCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/at-sopt.png" />
+        </div>
+        <div class="card-face card-back">
+          <img src="asset/dive-sopt.png" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 아기 카드 -->
+    <div class="card-wrapper photo-card photo-baby" id="babyCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/baby.png" alt="baby medium" />
+        </div>
+        <div class="card-face card-back">
+          <p>최애 음식 : 순두부찌개</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로필 카드 -->
+    <div class="card-wrapper photo-card photo-profile" id="profileCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/profile.png" />
+        </div>
+        <div class="card-face card-back">
+          <p>@tion PM을 맡고 있고..</p>
+          <p>손가락의 엄지를 맡고 있어요</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 영화 카드 -->
+    <div class="card-wrapper photo-card photo-movie" id="movieCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/movie.png" />
+        </div>
+        <div class="card-face card-back">
+          <p>살면서 영화 5개만 봐야한다면?</p>
+          <p>1. 포레스트 검프</p>
+          <p>2. 쥬라기 공원 2</p>
+          <p>3. 내가 널 사랑할 수 없는 10가지 이유</p>
+          <p>4. 탑건 매버릭</p>
+          <p>5. 해피엔드</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- @tion 카드 -->
+    <div class="card-wrapper photo-card photo-ation" id="ationCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/ation.png" />
+        </div>
+        <div class="card-face card-back">
+          <p>당신의 속도에 맞춰 함께 달리며</p>
+          <p>발표의 두려움을 자신감으로 바꿔주는</p>
+          <b>AI 발표 준비 서비스</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPth 카드 -->
+    <div class="card-wrapper photo-card photo-depth" id="depthCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/depth.png" />
+        </div>
+        <div class="card-face card-back">
+          <p>파트원에서</p>
+          <p>파트장까지 했어요!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 노래방 카드 -->
+    <div class="card-wrapper photo-card photo-song" id="songCard">
+      <div class="shadow-box card-inner">
+        <div class="card-face card-front">
+          <img src="asset/song.jpeg" />
+        </div>
+        <div class="card-face card-back">
+          <p>제 18번 곡은</p>
+          <p>보헤미안 랩소디!</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const minX = 100;
+      const maxX = 1400;
+      const minY = 100;
+      const maxY = 800;
+
+      const placedCards = [];
+      const PADDING = 40;
+
+      function isOverlap(x, y, width, height) {
+        return placedCards.some((card) => {
+          const noOverlap =
+            x + width + PADDING < card.x ||
+            x > card.x + card.width + PADDING ||
+            y + height + PADDING < card.y ||
+            y > card.y + card.height + PADDING;
+
+          return !noOverlap;
+        });
+      }
+
+      // ⭐ 카드 배치 & 플립을 실행하는 함수
+      function initCards() {
+        const cards = document.querySelectorAll(".card-wrapper");
+
+        cards.forEach((card) => {
+          const width =
+            card.offsetWidth || parseInt(getComputedStyle(card).width);
+          const height =
+            card.offsetHeight || parseInt(getComputedStyle(card).height);
+
+          let x, y;
+          let tries = 0;
+          const maxTries = 1000;
+
+          do {
+            x = Math.random() * (maxX - minX) + minX;
+            y = Math.random() * (maxY - minY) + minY;
+            tries++;
+          } while (isOverlap(x, y, width, height) && tries < maxTries);
+
+          card.style.left = x + "px";
+          card.style.top = y + "px";
+
+          placedCards.push({ x, y, width, height });
+
+          card.addEventListener("click", () => {
+            card.classList.toggle("is-flipped");
+          });
+        });
+      }
+
+      // ⭐ title.png 클릭 → 오버레이 제거 + 카드 실행
+      window.addEventListener("DOMContentLoaded", () => {
+        const titleScreen = document.getElementById("titleScreen");
+
+        titleScreen.addEventListener("click", () => {
+          titleScreen.style.display = "none"; // 타이틀 사라짐
+          initCards(); // 그때부터 카드 배치 & 플립 활성화
+        });
+      });
+    </script>
+  </body>
+</html>
